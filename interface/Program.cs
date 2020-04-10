@@ -4,49 +4,45 @@ namespace HelloApp
 {
     interface IShooting
     {
-        void Shoot(string messege);
+        void Shoot();
     }
 
     class Tank : IShooting
     {
-        public void Shoot(string messege)
+        public void Shoot()
         {
-            Console.WriteLine(messege);
+            Console.WriteLine("Выстрелил фугасом из орудия");
         }
     }
 
     class Halicopter : IShooting
     {
-        public void Shoot(string messege)
+        public void Shoot()
         {
-            Console.WriteLine(messege);
+            Console.WriteLine("Дал несколько пулеметных очередей и пустил ракету");
         }
     }
 
     class Rifle : IShooting
     {
-        public void Shoot(string messege)
+        public void Shoot()
         {
-            Console.WriteLine(messege);
+            Console.WriteLine("Выстрелила с точным попаданием в уязвимое место");
         }
     }
 
 
     class Program
     {
-        static void Action(IShooting shooter, string messege)
-        {
-            shooter.Shoot(messege);
-        }
         static void Main(string[] args)
         {
             Tank tank = new Tank();
             Halicopter halicopter = new Halicopter();
             Rifle rifle = new Rifle();
 
-            Action(tank, "Выстрелил фугасом из орудия");
-            Action(halicopter, "Дал несколько пулеметных очередей и пустил ракету");
-            Action(rifle, "Выстрелила с точным попаданием в уязвимое место");
+            tank.Shoot();
+            halicopter.Shoot();
+            rifle.Shoot();
 
             Console.Read();
         }
