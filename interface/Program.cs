@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace HelloApp
+namespace Interface
 {
     interface IShooting
     {
@@ -18,7 +18,7 @@ namespace HelloApp
 
 
 
-    class Tank : IShooting, IMovable, IFlyable
+    class Tank : IShooting, IMovable
     {
         public void Shoot()
         {
@@ -27,10 +27,6 @@ namespace HelloApp
         public void Move()
         {
             Console.WriteLine("Проехал по грязи");
-        }
-        public void Fly()
-        {
-            Console.WriteLine("Не может летать");
         }
     }
 
@@ -50,19 +46,11 @@ namespace HelloApp
         }
     }
 
-    class Rifle : IShooting, IMovable, IFlyable
+    class Rifle : IShooting
     {
         public void Shoot()
         {
             Console.WriteLine("Выстрелила с точным попаданием в уязвимое место");
-        }
-        public void Move()
-        {
-            Console.WriteLine("Не может перемещатся");
-        }
-        public void Fly()
-        {
-            Console.WriteLine("Не может летать");
         }
     }
 
@@ -80,18 +68,23 @@ namespace HelloApp
             whoDoAction.Add(halicopter);
             whoDoAction.Add(rifle);
 
-            // что-то я в этом не уверен, наверное должно быть что-то проще
-            for(int i = 0; i < whoDoAction.Count; i++)
-            {
-                ((IFlyable)whoDoAction[i])?.Fly();
-            }
-            for (int i = 0; i < whoDoAction.Count; i++)
-            {                
-                ((IMovable)whoDoAction[i])?.Move();             
-            }
             for (int i = 0; i < whoDoAction.Count; i++)
             {
-                ((IShooting)whoDoAction[i])?.Shoot();
+                if((whoDoAction[i] as IFlyable) != null)
+                   (whoDoAction[i] as IFlyable).Fly();
+            }
+            Console.WriteLine(" ");
+
+            for (int i = 0; i < whoDoAction.Count; i++)
+            {
+                if ((whoDoAction[i] as IMovable) != null)
+                    (whoDoAction[i] as IMovable).Move();             
+            }
+            Console.WriteLine(" ");
+
+            for (int i = 0; i < whoDoAction.Count; i++)
+            {
+                ((IShooting)whoDoAction[i]).Shoot();
             }
 
             Console.Read();
