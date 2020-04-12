@@ -68,11 +68,9 @@ namespace Interface
         }
     }
 
-
-
-
     class Program
     {
+        static List<IShooting> whoDoAction = new List<IShooting>();
         static void Main(string[] args)
         {
             Tank tank = new Tank();
@@ -81,13 +79,19 @@ namespace Interface
             Mi28 mi28 = new Mi28();
             KA50 ka50 = new KA50();
 
-            List<IShooting> whoDoAction = new List<IShooting>();
             whoDoAction.Add(tank);
             whoDoAction.Add(halicopter);
             whoDoAction.Add(rifle);
             whoDoAction.Add(mi28);
             whoDoAction.Add(ka50);
 
+            Attack();
+
+            Console.Read();
+        }
+
+        static void Attack()
+        {
             for (int i = 0; i < whoDoAction.Count; i++)
             {
                 if((whoDoAction[i] as IFlyable) != null)
@@ -105,9 +109,7 @@ namespace Interface
             for (int i = 0; i < whoDoAction.Count; i++)
             {
                 ((IShooting)whoDoAction[i]).Shoot();
-            }
-
-            Console.Read();
+            }            
         }
     }
 }
